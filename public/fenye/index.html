@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <title>Bootstrap Table</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div class="container">
+    <h2>统计列表</h2>
+    <div class="fixed-table-toolbar">
+        <div class="columns columns-left btn-group">
+            <button class="btn btn-default" type="button">按天</button>
+            <button class="btn btn-default" type="button">按时</button>
+        </div>
+        <div class="columns columns-right btn-group pull-right">
+            <button class="btn btn-default" type="button" id="js_showPop">筛选</button>
+        </div>
+    </div>
+    <table id="table"></table>
+</div>
+<div class="cover-floor" id="js_cover"></div>
+<div class="popCover new-filtrate" id="js_popSearch">
+    <div class="popInfo">
+        <div class="form-item">
+            <label>渠道</label>
+            <div class="list">
+                <span>渠道1</span>
+                <span>渠道2</span>
+                <span>渠道3</span>
+                <span>渠道3</span>
+                <span>渠道3</span>
+            </div>
+        </div>
+        <div class="form-item">
+            <label>版本</label>
+            <div class="list">
+                <span>渠道1</span>
+                <span>渠道2</span>
+            </div>
+            <!--<select>-->
+                <!--<option value="0">请选择版本</option>-->
+                <!--<option value="1">V1.2</option>-->
+            <!--</select>-->
+        </div>
+        <div class="form-item">
+            <label>时段</label>
+            <div class="list">
+                <span>7天</span>
+                <span>15天</span>
+                <span>30天</span>
+            </div>
+        </div>
+        <div class="from-to">
+            <input id="minPrice" type="date" placeholder="开始时间"><span></span><input id="maxPrice" type="date" value="" placeholder="结束时间">
+        </div>
+    </div>
+    <div class="form-btn">
+        <button type="button" class="btn btn-default">重置</button>
+        <button type="button" class="btn btn-primary">确认</button>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-table.min.js"></script>
+<script src="js/bootstrap-table-zh-CN.min.js"></script>
+<script>
+    $(function () {
+        $('#table').bootstrapTable({
+            url: 'js/data1.json',
+            columns: [{
+                sortable: true,
+                field: 'time',
+                title: '时间'
+            }, {
+                sortable: true,
+                field: 'new',
+                title: '新增'
+            }, {
+                sortable: true,
+                field: 'add',
+                title: '收入'
+            }, {
+                sortable: true,
+                field: 'arpu',
+                title: 'arpu'
+            }],
+            pagination: true,
+            pageSize: 20,
+            pageList: [20, 50, 100],
+//                showRefresh:true,
+//                search:true,
+        });
+        $('#js_showPop').click(function(){
+            $('#js_cover').show();
+            $('#js_popSearch').css('left','10%');
+
+        })
+        $('#js_cover').click(function(){
+            $(this).hide();
+            $('#js_popSearch').css('left','100%');
+
+        });
+        $(document).on('click','.list span',function(){
+            $(this).addClass('active').siblings().removeClass('active');
+        })
+    });
+</script>
+</body>
+</html>

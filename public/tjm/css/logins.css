@@ -1,0 +1,10 @@
+body .common-form {
+    padding: 20px;
+    position: relative
+}
+.btn-primary{
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    margin-top: 20px;
+}
